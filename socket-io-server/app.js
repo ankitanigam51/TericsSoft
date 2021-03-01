@@ -16,14 +16,21 @@ io.on("connection", socket => {
   );
   socket.on("disconnect", () => console.log("Client disconnected"));
 });
-const getApiAndEmit = async socket => {
-  try {
-    const res = await axios.get(
-      "https://api.darksky.net/forecast/PUT_YOUR_API_KEY_HERE/43.7695,11.2558"
-    );
-    socket.emit("FromAPI", res.data.currently.temperature);
-  } catch (error) {
-    console.error(`Error: ${error.code}`);
-  }
+const getApiAndEmit =  function draw() {
+      var canvas = document.getElementById('clicle');
+      if(canvas.getContext){
+        var ctx = canvas.getContext('2d');
+        var X = canvas.width 
+        var Y = canvas.clientHeight;
+        var R = 130
+        ctx.beginPath();
+        ctx.arc(X,Y,R,0,2*Math.PI, false);
+        ctx.linewidth = 3;
+        ctx.strokeStyle = '#FF000'
+        ctx.stroke();
+      }
+    }
+    socket.emit("FromDraw", res.data.currently.canvas);
+
 };
 server.listen(port, () => console.log(`Listening on port ${port}`));
